@@ -57,10 +57,10 @@ export default class Profile extends Component {
                         <ActionButton.Item buttonColor='#1abc9c' title="New Task" onPress={() => this.onActionButtonItemPress()}>
                             <Icon name="md-create" style={styles.actionButtonIcon}/>
                         </ActionButton.Item>
-                        <ActionButton.Item buttonColor='#e74c3c' title="Notifications" onPress={() => {}}>
+                        <ActionButton.Item buttonColor='#e74c3c' title="Notifications" onPress={() => this.onActionButtonItemPress()}>
                             <Icon name="md-notifications" style={styles.actionButtonIcon}/>
                         </ActionButton.Item>
-                        <ActionButton.Item buttonColor='#9b59b6' title="All Tasks" onPress={() => {}}>
+                        <ActionButton.Item buttonColor='#9b59b6' title="All Tasks" onPress={() => this.onActionButtonItemPress()}>
                             <Icon name="md-done-all" style={styles.actionButtonIcon}/>
                         </ActionButton.Item>
                     </ActionButton>
@@ -90,10 +90,10 @@ export default class Profile extends Component {
     }
 
     onBackAndroid = () => {
-        if (this.exitTime && this.exitTime + 2000 >= Date.now()) {
+        if (exitTime && exitTime + 2000 >= Date.now()) {
             return false;
         }
-        this.exitTime = Date.now();
+        exitTime = Date.now();
         ToastAndroid.show('再按一次退出应用', ToastAndroid.SHORT);
         return true;
     };

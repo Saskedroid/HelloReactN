@@ -70,6 +70,7 @@ export default class About extends Component {
                         return(
                             <TouchableOpacity 
                                 activeOpacity={0.5}
+                                onPress={() => this.itemClick(value)}
                                 key={index}
                                 style={styles.sectionItemChild}>
                                 <Icon style={styles.sectionItemChildImage} name={value.icon}/>
@@ -80,6 +81,14 @@ export default class About extends Component {
                 }
             </View>
         );
+    }
+
+    itemClick(value) {
+        switch (value.name) {
+            case '账号信息':
+                this.props.navigation.navigate('Account', { title: value.name })
+                break;
+        }
     }
 
     componentDidMount() {
@@ -94,10 +103,10 @@ export default class About extends Component {
     }
 
     onBackAndroid = () => {
-        if (this.exitTime && this.exitTime + 2000 >= Date.now()) {
+        if (exitTime && exitTime + 2000 >= Date.now()) {
             return false;
         }
-        this.exitTime = Date.now();
+        exitTime = Date.now();
         ToastAndroid.show('再按一次退出应用', ToastAndroid.SHORT);
         return true;
     };

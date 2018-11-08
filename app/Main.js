@@ -9,6 +9,7 @@ import HomeScreen from './Home';
 import ProfileScreen from './Profile';
 import AboutScreen from './About';
 import DetailScreen from './Detail';
+import AccountScreen from './Account';
 
 /** 
  * 关于选项卡子页面无法修改导航器选项的问题请参考官方文档：
@@ -63,7 +64,7 @@ const TabStack = createBottomTabNavigator({ // 取代TabNavigator
     backBehavior: 'none' // 返回键是否返回初始Tab页，可选“initalRoute”和“none”，默认“initalRoute”
 });
 
-// 添加一个StackNavigator作为TabStack的父级，并将Detail页面放在里面
+// 添加一个StackNavigator作为TabStack的父级，并将Detail等页面放在里面
 const MainStack = createStackNavigator({
     Tabs: {
         screen: TabStack,
@@ -71,7 +72,8 @@ const MainStack = createStackNavigator({
             header: null
         })
     },
-    Detail: DetailScreen
+    Detail: DetailScreen,
+    Account: AccountScreen
 });
 
 export default class Main extends React.Component {

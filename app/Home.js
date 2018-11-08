@@ -150,11 +150,11 @@ export default class Home extends Component {
 
     // Android返回键监听
     onBackAndroid = () => {
-        if (this.exitTime && this.exitTime + 2000 >= Date.now()) {
+        if (exitTime && exitTime + 2000 >= Date.now()) {
             // BackHandler.exitApp();
             return false;
         }
-        this.exitTime = Date.now();
+        exitTime = Date.now();
         ToastAndroid.show('再按一次退出应用', ToastAndroid.SHORT);
         return true;
     };

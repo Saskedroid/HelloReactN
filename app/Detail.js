@@ -1,5 +1,12 @@
 import React from 'react';
-import { WebView } from 'react-native';
+import { 
+    WebView,
+    View,
+    TextInput,
+    Text,
+    StyleSheet
+} from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 export default class Detail extends React.Component {
     // 在标题中使用参数
@@ -16,10 +23,53 @@ export default class Detail extends React.Component {
         const injectjs = "javascript:(function(){var objs=document.getElementsByTagName('img');for(var i=0;i<objs.length;i++){var img=objs[i];img.style.maxWidth='100%';img.style.height='auto';}})()";
 
         return(
-            <WebView
-                originWhitelist={['*']}
-                source={{html: content}}
-                injectedJavaScript={injectjs} />
+            <View style={{flex: 1}}>
+                <WebView
+                    originWhitelist={['*']}
+                    source={{html: content}}
+                    injectedJavaScript={injectjs}
+                    style={{marginBottom: 50}} />
+                <View style={styles.bottomBar}>
+                    <TextInput
+                        placeholder="评论"
+                        style={styles.bottomInput}/>
+                    <View style={styles.bottomIcons}>
+                        <Icon name="md-heart" style={styles.bottomIcon}/>
+                        <Icon name="md-chatbubbles" style={styles.bottomIcon}/>
+                        <Icon name="md-thumbs-up" style={styles.bottomIcon}/>
+                    </View>
+                </View>
+            </View>
         )
     }
 }
+
+const styles = StyleSheet.create({
+    bottomBar: {
+        position: 'absolute',
+        bottom: 0,
+        width: '100%',
+        backgroundColor: '#EFEFF4',
+        borderColor: '#DEDEE3',
+        borderTopWidth: 0.8,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    bottomInput: {
+        width: '60%',
+        height: 40,
+        margin: 5,
+        backgroundColor: 'white'
+    },
+    bottomIcons: {
+        width: '40%',
+        flexDirection: 'row',
+        justifyContent: 'space-around',
+        alignItems: 'center'
+    },
+    bottomIcon: {
+        fontSize: 24,
+        color: '#0098FD'
+    }
+})

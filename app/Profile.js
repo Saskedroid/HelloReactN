@@ -54,13 +54,13 @@ export default class Profile extends Component {
                         [this.state.selected]: {selected: true}
                     }}/>
                     <ActionButton buttonColor='rgba(52,152,219,1)' offsetX={16} offsetY={16}>
-                        <ActionButton.Item buttonColor='#1abc9c' title="New Task" onPress={() => this.onActionButtonItemPress()}>
+                        <ActionButton.Item buttonColor='#1abc9c' title="New Task" onPress={() => this.onActionButtonItemPress(1)}>
                             <Icon name="md-create" style={styles.actionButtonIcon}/>
                         </ActionButton.Item>
-                        <ActionButton.Item buttonColor='#e74c3c' title="Notifications" onPress={() => this.onActionButtonItemPress()}>
+                        <ActionButton.Item buttonColor='#e74c3c' title="Notifications" onPress={() => this.onActionButtonItemPress(2)}>
                             <Icon name="md-notifications" style={styles.actionButtonIcon}/>
                         </ActionButton.Item>
-                        <ActionButton.Item buttonColor='#9b59b6' title="All Tasks" onPress={() => this.onActionButtonItemPress()}>
+                        <ActionButton.Item buttonColor='#9b59b6' title="All Tasks" onPress={() => this.onActionButtonItemPress(3)}>
                             <Icon name="md-done-all" style={styles.actionButtonIcon}/>
                         </ActionButton.Item>
                     </ActionButton>
@@ -74,8 +74,8 @@ export default class Profile extends Component {
         });
     }
 
-    onActionButtonItemPress() {
-
+    onActionButtonItemPress(index) {
+        
     }
 
     componentDidMount() {

@@ -1,6 +1,6 @@
 # HelloWorld
 
-A Hello World sample for [React Native](https://reactnative.cn/).
+A Hello World demo for [React Native](https://reactnative.cn/).
 
 ## Screenshot
 
@@ -22,4 +22,4 @@ A Hello World sample for [React Native](https://reactnative.cn/).
 
 ## Data source
 
-<img alt="DCloud" src="http://img-cdn-qiniu.dcloud.net.cn/logo.svg" width="120" href="http://spider.dcloud.net.cn/api/news">
+<img alt="DCloud" src="http://img-cdn-qiniu.dcloud.net.cn/dcloud_logo.png" width="120" href="http://spider.dcloud.net.cn/api/news">

@@ -38,7 +38,7 @@ export default class Splash extends Component<Props> {
     }, 2000);
   };
 
-  // 组件将要移除时清除定时器
+  // 组件将移除时清除定时器
   componentWillUnmount() {
       this.timer && clearTimeout(this.timer);
   }

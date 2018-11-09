@@ -61,6 +61,7 @@ const TabStack = createBottomTabNavigator({ // 取代TabNavigator
         }
     },
     // swipeEnabled: true, // 是否允许滑动（注：createBottomTabNavigator不支持该选项）
+    lazy: true,
     backBehavior: 'none' // 返回键是否返回初始Tab页，可选“initalRoute”和“none”，默认“initalRoute”
 });
 

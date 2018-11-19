@@ -10,9 +10,12 @@ import {
   StyleSheet
 } from 'react-native';
 import Toast, { DURATION } from 'react-native-easy-toast'; // 目前这个库无法避免底部Toast被软键盘遮挡的问题
+import AsyncStorageUtils from './util/AsyncStorageUtils';
 
 // 获取设备宽高
 const {width, height} = Dimensions.get('window');
+// 用于读取版本号
+let pkgInfo = require('/React Native/HelloWorld/package.json');
 
 export default class Login extends Component {
   constructor(props) {
@@ -36,7 +39,9 @@ export default class Login extends Component {
         </View>
         <TextInput
           placeholder="请输入用户名"
-          clearButtonMode="always"
+          clearButtonMode="while-editing"
+          autoCapitalize="none"
+          defaultValue={this.state.username}
           maxLength={20}
           returnKeyType="next"
           underlineColorAndroid="transparent"
@@ -45,7 +50,8 @@ export default class Login extends Component {
         <TextInput
           placeholder="请输入密码"
           secureTextEntry={true}
-          clearButtonMode="always"
+          clearButtonMode="while-editing"
+          defaultValue={this.state.password}
           maxLength={20}
           returnKeyType="done"
           underlineColorAndroid="transparent"
@@ -67,7 +73,7 @@ export default class Login extends Component {
           </TouchableOpacity>
         </View>
         <View style={styles.bottomStyle}>
-          <Text style={styles.textStyle}>v1.0.0</Text>
+          <Text style={styles.textStyle}>v{pkgInfo.version}</Text>
         </View>
         <Toast ref="toast" position='center' style={{backgroundColor: 'gray'}}/>
       </View>
@@ -85,10 +91,32 @@ export default class Login extends Component {
     this.setState({
       isLogging: true
     });
+    // 保存用户名密码
+    AsyncStorageUtils.save("USERNAME", this.state.username);
+    AsyncStorageUtils.save("PASSWORD", this.state.password);
     // 跳转到主界面
     this.timer = setTimeout(() => {
       this.props.navigation.navigate('Main');
-    }, 1500);
+    }, this.randomTime());
+  }
+
+  randomTime() {
+    return Math.random() * 3 + 500; // 500~1500
+  }
+
+  componentDidMount() {
+    let that = this;
+    // 获取用户名密码
+    AsyncStorageUtils.get("USERNAME").then((value) => {
+      that.setState({
+        username: value
+      })
+    });
+    AsyncStorageUtils.get("PASSWORD").then((value) => {
+      that.setState({
+        password: value
+      })
+    });
   }
 
   componentWillUnmount() {

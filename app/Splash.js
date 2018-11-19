@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
   instructions: {
     fontSize: 16,
     textAlign: 'center',
-    color: '#333333',
+    color: '#333',
     marginBottom: 10,
   },
 });

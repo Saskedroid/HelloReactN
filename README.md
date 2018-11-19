@@ -1,12 +1,16 @@
 # HelloWorld
 
-A Hello World demo for [React Native](https://reactnative.cn/).
+A Hello World demo for React Native.
 
 ## Screenshot
 
 <img alt="Splash" src="https://raw.githubusercontent.com/SaskeDroid/HelloWorld/master/screenshot/Splash.png" width="280"> <img alt="Login" src="https://raw.githubusercontent.com/SaskeDroid/HelloWorld/master/screenshot/Login.png" width="280"> <img alt="Home" src="https://raw.githubusercontent.com/SaskeDroid/HelloWorld/master/screenshot/Home.png" width="280">
 
 <img alt="Detail" src="https://raw.githubusercontent.com/SaskeDroid/HelloWorld/master/screenshot/Detail.png" width="280"> <img alt="Profile" src="https://raw.githubusercontent.com/SaskeDroid/HelloWorld/master/screenshot/Profile.png" width="280"> <img alt="About" src="https://raw.githubusercontent.com/SaskeDroid/HelloWorld/master/screenshot/About.png" width="280">
+
+## Getting Started
+
+See the [React Native](https://reactnative.cn/docs/getting-started/) website.
 
 ## Library
 
@@ -20,6 +24,6 @@ A Hello World demo for [React Native](https://reactnative.cn/).
 
 * [react-native-action-button](https://github.com/mastermoo/react-native-action-button)
 
-## Data source
+## Data Source
 
-<img alt="DCloud" src="http://img-cdn-qiniu.dcloud.net.cn/dcloud_logo.png" width="120" href="http://spider.dcloud.net.cn/api/news">
+<img alt="DCloud" src="http://img-cdn-qiniu.dcloud.net.cn/logo.svg" width="120" href="http://spider.dcloud.net.cn/api/news">

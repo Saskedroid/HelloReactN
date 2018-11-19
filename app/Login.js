@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import {
   Dimensions,
+  Animated,
+  Easing,
   View,
   Text,
-  Image,
   TextInput,
   TouchableOpacity,
   ActivityIndicator,
@@ -31,9 +32,7 @@ export default class Login extends Component {
     return (
       <View style={styles.container}>
         {/*组件内部的注释方式*/}
-        <Image 
-          source={require('../images/header_logo.png')} 
-          style={[styles.logoStyle, {width: 91, height: 81}]}/>
+        <AnimeImage/>
         <View style={{marginTop: 10, height: 60}}>
           {this.state.isLogging? (<ActivityIndicator size='large'/>) : (null)}
         </View>
@@ -121,6 +120,47 @@ export default class Login extends Component {
 
   componentWillUnmount() {
     this.timer && clearTimeout(this.timer);
+  }
+}
+
+// 自定义动画组件
+class AnimeImage extends Component {
+  state = {
+    // 初始值为0
+    ratation: new Animated.Value(0),
+    scaling: new Animated.Value(0)
+  }
+
+  componentDidMount() {
+    // 同时执行动画
+    Animated.parallel([
+      // 随时间变化执行动画
+      Animated.timing(this.state.ratation, {
+        toValue: 1, // 最终值变为1
+        duration: 2200,
+        easing: Easing.linear
+      }),
+      Animated.timing(this.state.scaling, {
+        toValue: 1,
+        duration: 1000,
+      })
+    ]).start();
+  }
+
+  render() {
+    // 插值函数，将[0, 1]映射为[0°, 360°]
+    const spin = this.state.ratation.interpolate({
+      inputRange: [0, 1],
+      outputRange: ['0deg', '360deg']
+    });
+
+    return(
+      <Animated.Image 
+        source={require('../images/header_logo.png')} 
+        style={[styles.logoStyle, {width: 91, height: 81, transform: [{rotate: spin}, {scale: this.state.scaling}]}]}>
+        {this.props.children}
+      </Animated.Image>
+    );
   }
 }
 

@@ -16,6 +16,13 @@ export default class Detail extends React.Component {
         }
     };
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            favorited: false
+        }
+    }
+
     render() {
         // 列表传过来的值
         const content = this.props.navigation.getParam("content", "");
@@ -34,13 +41,20 @@ export default class Detail extends React.Component {
                         placeholder="评论"
                         style={styles.bottomInput}/>
                     <View style={styles.bottomIcons}>
-                        <Icon name="md-heart" style={styles.bottomIcon}/>
+                        <Icon name={this.state.favorited? "md-heart" : "md-heart-empty"} style={styles.bottomIcon} onPress={() => this.favorited()}/>
                         <Icon name="md-chatbubbles" style={styles.bottomIcon}/>
-                        <Icon name="md-thumbs-up" style={styles.bottomIcon}/>
+                        <Icon name="md-share" style={styles.bottomIcon}/>
                     </View>
                 </View>
             </View>
         )
+    }
+
+    // 收藏
+    favorited() {
+        this.setState({
+            favorited: !this.state.favorited
+        });
     }
 }
 

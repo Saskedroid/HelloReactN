@@ -35,14 +35,14 @@ export default class HttpUtils {
                 if(response.ok) {
                     return response.json();
                 } else {
-                    callback(false, response.status); //
+                    callback(false, response.status); // TBC
                 }
             })
             .then((response) => {
                 callback(true, response);
             })
             .catch((error) => {
-                callback(false, error); //
+                callback(false, error); // TBC
             })
         });
     }
@@ -65,14 +65,14 @@ export default class HttpUtils {
                 if(response.ok) {
                     return response.json();
                 } else {
-                    callback(false, response.status); //
+                    callback(false, response.status); // TBC
                 }
             })
             .then((response) => {
                 callback(true, response);
             })
             .catch((error) => {
-                callback(false, error); //
+                callback(false, error); // TBC
             })
         });
     }

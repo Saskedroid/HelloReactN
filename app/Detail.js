@@ -1,9 +1,9 @@
 import React from 'react';
 import { 
     WebView,
+    ActivityIndicator,
     View,
     TextInput,
-    Text,
     StyleSheet
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
@@ -35,7 +35,11 @@ export default class Detail extends React.Component {
                     originWhitelist={['*']}
                     source={{html: content}}
                     injectedJavaScript={injectjs}
-                    style={{marginBottom: 50}} />
+                    style={{marginBottom: 50}}
+                    startInLoadingState={true}
+                    renderLoading={() => {
+                        return(<ActivityIndicator size='large'/>)
+                    }} />
                 <View style={styles.bottomBar}>
                     <TextInput
                         placeholder="评论"
@@ -43,7 +47,7 @@ export default class Detail extends React.Component {
                     <View style={styles.bottomIcons}>
                         <Icon name={this.state.favorited? "md-heart" : "md-heart-empty"} style={styles.bottomIcon} onPress={() => this.favorited()}/>
                         <Icon name="md-chatbubbles" style={styles.bottomIcon}/>
-                        <Icon name="md-share" style={styles.bottomIcon}/>
+                        <Icon name="md-thumbs-up" style={styles.bottomIcon}/>
                     </View>
                 </View>
             </View>

@@ -79,9 +79,14 @@ const MainStack = createStackNavigator({
 
 export default class Main extends React.Component {
     render() {
-        return <MainStack />;
+        return <MainStack navigation={this.props.navigation}/>;
     }
 };
+
+// 默认Account只能跳转到同级的Tabs、Detail，如果想跳转到父组件的路由
+// 要在父组件定义父.router=子.router，同时子组件赋navigation属性😑
+// 参考：https://www.cnblogs.com/fengyunyue/p/7596832.html
+Main.router = MainStack.router;
 
 const styles = StyleSheet.create({
     tabBarIcon: {

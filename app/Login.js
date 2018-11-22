@@ -7,7 +7,6 @@ import {
   Text,
   TextInput,
   TouchableOpacity,
-  ActivityIndicator,
   StyleSheet
 } from 'react-native';
 import Toast, { DURATION } from 'react-native-easy-toast'; // 目前这个库无法避免底部Toast被软键盘遮挡的问题
@@ -23,8 +22,7 @@ export default class Login extends Component {
     super(props);
     this.state = {
         username: "",
-        password: "",
-        isLogging: false
+        password: ""
     }
   }
 
@@ -32,10 +30,7 @@ export default class Login extends Component {
     return (
       <View style={styles.container}>
         {/*组件内部的注释方式*/}
-        <AnimeImage/>
-        <View style={{marginTop: 10, height: 60}}>
-          {this.state.isLogging? (<ActivityIndicator size='large'/>) : (null)}
-        </View>
+        <AnimeImage ref="animeImage"/>
         <TextInput
           placeholder="请输入用户名"
           clearButtonMode="while-editing"
@@ -87,12 +82,12 @@ export default class Login extends Component {
     if(this.state.password == '') {
         return this.refs.toast.show("请输入密码");
     }
-    this.setState({
-      isLogging: true
-    });
-    // 保存用户名密码
+
     AsyncStorageUtils.save("USERNAME", this.state.username);
     AsyncStorageUtils.save("PASSWORD", this.state.password);
+
+    // 正在登录
+    this.refs.animeImage.logging();
     // 跳转到主界面
     this.timer = setTimeout(() => {
       this.props.navigation.navigate('Main');
@@ -100,12 +95,12 @@ export default class Login extends Component {
   }
 
   randomTime() {
-    return Math.random() * 3 + 500; // 500~1500
+    return Math.random() * 1000 + 1000; // 1000~2000
   }
 
   componentDidMount() {
-    let that = this;
     // 获取用户名密码
+    let that = this;
     AsyncStorageUtils.get("USERNAME").then((value) => {
       that.setState({
         username: value
@@ -126,25 +121,27 @@ export default class Login extends Component {
 // 自定义动画组件
 class AnimeImage extends Component {
   state = {
-    // 初始值为0
-    ratation: new Animated.Value(0),
+    ratation: new Animated.Value(0), // 初始值为0
     scaling: new Animated.Value(0)
   }
 
   componentDidMount() {
-    // 同时执行动画
-    Animated.parallel([
-      // 随时间变化执行动画
+    // 随时间变化执行动画
+    Animated.timing(this.state.scaling, {
+      toValue: 1, // 最终值为1
+      duration: 1000,
+    }).start();
+  }
+
+  logging() {
+    // 循环动画
+    Animated.loop(
       Animated.timing(this.state.ratation, {
-        toValue: 1, // 最终值变为1
-        duration: 2200,
-        easing: Easing.linear
-      }),
-      Animated.timing(this.state.scaling, {
         toValue: 1,
-        duration: 1000,
+        duration: 2000,
+        easing: Easing.linear
       })
-    ]).start();
+    ).start();
   }
 
   render() {
@@ -176,7 +173,7 @@ const styles = StyleSheet.create({
   },
   logoStyle: {
     marginTop: 50,
-    marginBottom: 10
+    marginBottom: 70
   },
   inputStyle: {
     width: width * 0.9,

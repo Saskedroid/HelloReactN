@@ -15,17 +15,22 @@ import Icon from 'react-native-vector-icons/Ionicons';
 let exitTime = 0;
 
 const sectionData = [
-    { key: 0, title: "个人", data: [[{name: "账号信息", icon: 'md-person'}, {name: "修改密码", icon: 'md-key'}, {name: "意见反馈", icon: 'md-paper-plane'}, {name: "我的收藏", icon: 'md-star-outline'}]] },
-    { key: 1, title: "商城", data: [[{name: "官方网站", icon: 'md-home'}, {name: "活动专区", icon: 'md-heart-empty'}, {name: "积分兑换", icon: 'md-gift'}]] },
-    { key: 2, title: "关于", data: [[{name: "使用帮助", icon: 'md-help'}, {name: "开源许可", icon: 'md-share'}]] }
+    { key: 0, title: "应用", data: [[
+        {name: "账号信息", icon: 'md-person'}, 
+        {name: "我的收藏", icon: 'md-star-outline'}, 
+        {name: "使用帮助", icon: 'md-help'}, 
+        {name: "意见反馈", icon: 'md-paper-plane'}, 
+        {name: "开源许可", icon: 'md-share'}]]
+    }, { key: 1, title: "推广", data: [[
+        {name: "官方网站", icon: 'md-home'}, 
+        {name: "活动专区", icon: 'md-basket'}, 
+        {name: "积分兑换", icon: 'md-gift'}]]
+    }
 ];
 
 export default class About extends Component {
     static navigationOptions = {
         header: null
-        // headerTitle: (
-        //     <Text style={{flex: 1, textAlign: 'center', fontWeight: 'bold', fontSize: 18}}>我的</Text>
-        // ),
     }
 
     _didFocusSubscription;
@@ -57,7 +62,7 @@ export default class About extends Component {
     renderSectionHeader(title) {
         return(
             <View style={styles.sectionHeader}>
-                <Text style={styles.sectionHeaderText}>{title}</Text>
+                <Text style={styles.sectionHeaderText}>▎{title}</Text>
             </View>
         );
     }
@@ -126,12 +131,13 @@ const styles = StyleSheet.create({
         paddingLeft: 10
     },
     sectionHeaderText: {
-        color: '#666'
+        color: '#777'
     },
     sectionItem: {
         flexDirection: 'row',
         justifyContent: 'flex-start',
-        backgroundColor: '#EFEFF4'
+        backgroundColor: '#EFEFF4',
+        flexWrap: 'wrap'
     },
     sectionItemChild: {
         width: '25%',

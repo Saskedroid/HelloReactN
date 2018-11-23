@@ -7,6 +7,7 @@ import {
     Alert,
     StyleSheet
 } from 'react-native';
+import InputDialog from './util/InputDialog';
 import Icon from 'react-native-vector-icons/EvilIcons';
 
 export default class Detail extends React.Component {
@@ -20,44 +21,76 @@ export default class Detail extends React.Component {
         }
     };
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            modalVisible: false,
+            modalTitle: ""
+        }
+    }
+
     render() {
         return(
             <View style={{flex: 1, backgroundColor: 'EFEFF4', marginTop: 25}}>
-                <TouchableOpacity style={styles.container}>
+                <TouchableOpacity activeOpacity={0.7} style={styles.container}>
                     <Text style={styles.containerLeft}>头像</Text>
                     <View style={styles.containerRight}>
                         <Image source={require('../images/avatar.png')} style={styles.containerImage}/>
                     </View>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.container}>
+                <TouchableOpacity activeOpacity={0.7} style={styles.container} onPress={()=>this.editAccount(1)}>
                     <Text style={styles.containerLeft}>昵称</Text>
                     <Text style={styles.containerRight}>Null</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.container}>
+                <TouchableOpacity activeOpacity={0.7} style={styles.container} onPress={()=>this.editAccount(2)}>
                     <Text style={styles.containerLeft}>手机号</Text>
                     <Text style={styles.containerRight}>158****1234</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={[styles.container, {marginTop: 20}]}>
+                <TouchableOpacity activeOpacity={0.7} style={[styles.container, {marginTop: 20}]}>
                     <Text style={styles.containerLeft}>性别</Text>
                     <Text style={styles.containerRight}>保密</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.container}>
+                <TouchableOpacity activeOpacity={0.7} style={styles.container}>
                     <Text style={styles.containerLeft}>生日</Text>
                     <Text style={styles.containerRight}>1970年1月1日</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={styles.container}>
+                <TouchableOpacity activeOpacity={0.7} style={styles.container} onPress={()=>this.editAccount(3)}>
                     <Text style={styles.containerLeft}>地址</Text>
                     <Text numberOfLines={1} style={styles.containerRight}>未填写</Text>
                 </TouchableOpacity>
-                <TouchableOpacity style={[styles.container, {marginTop: 20}]}>
+                <TouchableOpacity activeOpacity={0.7} style={[styles.container, {marginTop: 20}]}>
                     <Text style={styles.containerLeft}>修改密码</Text>
                     <Icon name="chevron-right" style={styles.containerIcon}/>
                 </TouchableOpacity>
-                <TouchableOpacity activeOpacity={0.8} style={styles.containerBottom} onPress={()=>this.logout()}>
-                    <Text style={styles.containerLeft}>退出登录</Text>
+                <TouchableOpacity activeOpacity={0.7} style={styles.containerBottom} onPress={()=>this.logout()}>
+                    <Text>退出登录</Text>
                 </TouchableOpacity>
+                <InputDialog 
+                    dlgVisible={this.state.modalVisible}
+                    dlgTitle={this.state.modalTitle}
+                    dlgHide={() => this.setState({ modalVisible: false })}/>
             </View>
         )
+    }
+
+    // 编辑账户
+    editAccount(index) {
+        var title = "";
+        switch (index) {
+            case 1:
+                title = "修改昵称";
+                break;
+            case 2:
+                title = "修改手机号";
+                break;
+            case 3:
+                title = "修改地址";
+                break;
+        }
+        this.setState({
+            modalVisible: true,
+            modalTitle: title
+        });
     }
 
     // 退出登录
